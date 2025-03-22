@@ -30,13 +30,9 @@ export default function HomePage() {
       <div className="container mx-auto px-4 py-16">
         <div className="flex flex-col items-center gap-8">
           <h1 className="text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-            Welcome to TrainSite
+            TrainSite
           </h1>
           
-          <p className="text-xl text-gray-300 text-center max-w-2xl">
-            Track your fitness journey, visualize your progress, and achieve your goals
-          </p>
-
           <div className="relative w-full max-w-4xl rounded-lg overflow-hidden shadow-2xl">
             <img 
               src="/gymkuv.jpg" 
