@@ -22,13 +22,13 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
               <div className="space-x-4">
                 <Link 
-                  href="/register" 
+                  href="/progress"
                   className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
-                  Progress tracker
+                  Progress Tracker
                 </Link>
                 <Link
-                  href="/ProgressPage"
+                  href="/about"
                   className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   Learn More
