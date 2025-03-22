@@ -16,13 +16,13 @@ export default function HomePage() {
           <div className="relative w-full max-w-4xl rounded-lg overflow-hidden shadow-2xl">
             <img 
               src="/gymkuv.jpg" 
-              alt="Gym image" 
+              alt="Gym environment with fitness equipment" 
               className="w-full h-[400px] object-cover"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
               <div className="space-x-4">
                 <Link 
-                  href="/ProgressPage"
+                  href="/progress"
                   className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   Progress Tracker

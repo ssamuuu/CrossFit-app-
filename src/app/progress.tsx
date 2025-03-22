@@ -40,7 +40,7 @@ export default function HomePage() {
           <div className="relative w-full max-w-4xl rounded-lg overflow-hidden shadow-2xl">
             <img 
               src="/gymkuv.jpg" 
-              alt="Gym image" 
+              alt="Gym interior with equipment" 
               className="w-full h-[400px] object-cover"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -84,7 +84,7 @@ export default function HomePage() {
   );
 }
 
-function FeatureCard({ title, description, icon }: { title: string; description: string; icon: string }) {
+function FeatureCard({ title, description, icon }: Readonly<{ title: string; description: string; icon: string }>) {
   return (
     <div className="bg-gray-800/50 p-6 rounded-lg hover:bg-gray-700/50 transition-colors">
       <div className="text-4xl mb-4">{icon}</div>
@@ -140,17 +140,19 @@ export function ProgressPage() {
             <h2 className="text-2xl font-semibold mb-4">Log Workout</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Date</label>
+                <label htmlFor="date" className="block text-sm font-medium mb-1">Date</label>
                 <input
                   type="date"
+                  id="date"
                   name="date"
                   required
                   className="w-full bg-gray-700 rounded-md p-2 text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Exercise</label>
+                <label htmlFor="exercise" className="block text-sm font-medium mb-1">Exercise</label>
                 <select
+                  id="exercise"
                   name="exercise"
                   required
                   className="w-full bg-gray-700 rounded-md p-2 text-white"
@@ -161,18 +163,20 @@ export function ProgressPage() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Weight (kg)</label>
+                <label htmlFor="weight" className="block text-sm font-medium mb-1">Weight (kg)</label>
                 <input
                   type="number"
+                  id="weight"
                   name="weight"
                   required
                   className="w-full bg-gray-700 rounded-md p-2 text-white"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Reps</label>
+                <label htmlFor="reps" className="block text-sm font-medium mb-1">Reps</label>
                 <input
                   type="number"
+                  id="reps"
                   name="reps"
                   required
                   className="w-full bg-gray-700 rounded-md p-2 text-white"
