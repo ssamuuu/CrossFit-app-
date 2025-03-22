@@ -48,7 +48,7 @@ export default function HomePage() {
                   Get Started
                 </Link>
                 <Link
-                  href="/ProgressPage"
+                  href="/tracker"
                   className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   Learn More
