@@ -6,7 +6,7 @@ export default function HomePage() {
       <div className="container mx-auto px-4 py-16">
         <div className="flex flex-col items-center gap-8">
           <h1 className="text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-            Welcome to TrainSite
+            Welcome to FitTracker
           </h1>
           
           <p className="text-xl text-gray-300 text-center max-w-2xl">
@@ -16,16 +16,16 @@ export default function HomePage() {
           <div className="relative w-full max-w-4xl rounded-lg overflow-hidden shadow-2xl">
             <img 
               src="/gymkuv.jpg" 
-              alt="Gym environment with fitness equipment" 
+              alt="Gym image" 
               className="w-full h-[400px] object-cover"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
               <div className="space-x-4">
                 <Link 
-                  href="/tracker" // Updated to point to tracker.tsx
+                  href="/tracker" 
                   className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
-                  Progress Tracker
+                  Tracker
                 </Link>
                 <Link
                   href="/about"
