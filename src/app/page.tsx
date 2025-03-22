@@ -19,7 +19,7 @@ export default function HomePage() {
               alt="CrossFit gym" 
               className="w-full h-[400px] object-cover brightness-110 contrast-125 saturate-110"
               loading="eager"
-              priority="true"
+
             />
             <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/20 flex items-center justify-center">
               <div className="p-8 rounded-2xl bg-black/10">
