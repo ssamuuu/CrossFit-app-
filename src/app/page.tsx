@@ -8,7 +8,7 @@ export default function HomePage() {
         <h1>
           Homepage
         </h1>
-        <img src="C:\Users\samuv\omasivu\src\app\gymkuv.jpg"/>
+        <img src="/gymkuv.jpg" alt="Gym image" />
       </div>
     </main>
   );
