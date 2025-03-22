@@ -109,7 +109,7 @@ export default function EquipmentPage() {
                 index % 3 === 0 ? 'from-green-600/90 to-green-800/90' :
                 index % 3 === 1 ? 'from-emerald-600/90 to-emerald-800/90' :
                 'from-teal-600/90 to-teal-800/90'
-              } p-6 rounded-xl shadow-lg backdrop-blur-sm transform hover:scale-[1.02] transition-all duration-300 hover:shadow-emerald-500/20 hover:shadow-xl`}
+              } p-6 rounded-xl shadow-lg`}
             >
               <div className="absolute top-0 right-0 w-24 h-24 opacity-10 transform translate-x-8 -translate-y-8">
                 {item.icon}

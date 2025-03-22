@@ -73,7 +73,7 @@ export default function MovementsPage() {
           {Object.entries(MOVEMENT_CATEGORIES).map(([category, movements]) => (
             <div 
               key={category} 
-              className={`bg-gradient-to-br ${categoryColors[category as keyof typeof categoryColors]} p-6 rounded-xl shadow-lg backdrop-blur-sm transform hover:scale-[1.02] transition-all duration-300 hover:shadow-xl`}
+              className={`bg-gradient-to-br ${categoryColors[category as keyof typeof categoryColors]} p-6 rounded-xl shadow-lg`}
             >
               <h2 className="text-2xl font-bold mb-4 flex items-center">
                 {category}
@@ -83,7 +83,7 @@ export default function MovementsPage() {
                 {movements.map(movement => (
                   <li 
                     key={movement.name} 
-                    className="flex items-center space-x-2 p-2 rounded-lg bg-black/20 backdrop-blur-sm cursor-pointer hover:bg-black/30 transition-all duration-300"
+                    className="flex items-center space-x-2 p-2 rounded-lg bg-black/10 cursor-pointer"
                     onClick={() => handleMovementClick(movement.videoUrl)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
