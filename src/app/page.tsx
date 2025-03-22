@@ -6,7 +6,7 @@ export default function HomePage() {
       <div className="container mx-auto px-4 py-16">
         <div className="flex flex-col items-center gap-8">
           <h1 className="text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-            Welcome to FitTracker
+            Welcome to FitSite
           </h1>
           
           <p className="text-xl text-gray-300 text-center max-w-2xl">
