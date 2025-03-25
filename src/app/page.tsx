@@ -10,7 +10,7 @@ export default function HomePage() {
           </h1>
           
           <p className="text-xl text-gray-300 text-center max-w-2xl">
-            Discover CrossFit movements, essential equipment, and track your WOD progress
+            Discover CrossFit movements, essential equipment, and track your progress
           </p>
 
           <div className="relative w-full max-w-7xl rounded-xl overflow-hidden shadow-xl">
@@ -37,10 +37,10 @@ export default function HomePage() {
                     Equipment
                   </Link>
                   <Link
-                    href="/tracker"
+                    href="/login"
                     className="bg-purple-500/95 text-white px-8 py-4 rounded-lg font-semibold shadow-lg text-lg"
                   >
-                    WOD Tracker
+                    PR Tracker / Login
                   </Link>
                 </div>
               </div>
@@ -62,8 +62,8 @@ export default function HomePage() {
                 color: "from-emerald-600/90 to-emerald-800/90"
               },
               {
-                title: "Track WODs",
-                description: "Log your workouts of the day and monitor your CrossFit progress",
+                title: "Track your personal records",
+                description: "Log your personal records and monitor your progress",
                 icon: "📊",
                 color: "from-purple-600/90 to-purple-800/90"
               }
