@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import React from "react";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -15,32 +16,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-
-    try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
-
-      // Store user data in localStorage or session
-      localStorage.setItem('user', JSON.stringify(data.user));
-
-      // Update this line to use the correct route
-      router.push('/pr-tracker');
-
-    } catch (error: any) {
-      setError(error.message);
-    }
+    // Add login logic here
   };
 
   return (
