@@ -25,6 +25,7 @@ ChartJS.register(
 );
 
 interface PR {
+  id: number;
   exercise: string;
   weight: number;
   date: string;
@@ -35,30 +36,88 @@ export default function PRTrackerPage() {
   const [user, setUser] = useState<any>(null);
   const [prs, setPrs] = useState<PR[]>([]);
   const [newPR, setNewPR] = useState<PR>({
+    id: 0,
     exercise: 'squat',
-    weight: 0, // Set initial value to 0
-    date: new Date().toISOString().split('T')[0] || '', // Default to today's date
+    weight: 0,
+    date: new Date().toISOString().split('T')[0] || '',
   });
 
   useEffect(() => {
-    // Check if user is logged in
     const userData = localStorage.getItem('user');
     if (!userData) {
       router.push('/login');
       return;
     }
-    setUser(JSON.parse(userData));
-    // TODO: Fetch user's PRs from database
+    const user = JSON.parse(userData);
+    setUser(user);
+
+    const fetchPRs = async () => {
+      try {
+        const res = await fetch(`/api/prs?userId=${user.id}`);
+        if (!res.ok) throw new Error('Failed to fetch PRs');
+        const data = await res.json();
+        setPrs(data);
+      } catch (error) {
+        console.error('Error fetching PRs:', error);
+      }
+    };
+
+    fetchPRs();
   }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Add API call to save PR
-    setPrs([...prs, newPR]);
-    setNewPR({
-      ...newPR,
-      weight: 0
-    });
+
+    try {
+      const res = await fetch('/api/prs', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          ...newPR
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to save PR');
+      }
+
+      const updatedRes = await fetch(`/api/prs?userId=${user.id}`);
+      const updatedPRs = await updatedRes.json();
+      setPrs(updatedPRs);
+
+      setNewPR({
+        ...newPR,
+        weight: 0
+      });
+
+    } catch (error) {
+      console.error('Error saving PR:', error);
+    }
+  };
+
+  const handleDelete = async (prId: number) => {
+    if (!window.confirm('Are you sure you want to delete this PR?')) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/prs?id=${prId}&userId=${user.id}`, {
+        method: 'DELETE',
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to delete PR');
+      }
+
+      const updatedRes = await fetch(`/api/prs?userId=${user.id}`);
+      const updatedPRs = await updatedRes.json();
+      setPrs(updatedPRs);
+    } catch (error) {
+      console.error('Error deleting PR:', error);
+    }
   };
 
   const chartData = {
@@ -101,7 +160,7 @@ export default function PRTrackerPage() {
         <h1 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
           Personal Records
         </h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-gray-800 p-6 rounded-lg shadow-xl">
             <h2 className="text-2xl font-semibold mb-4">Add New PR</h2>
@@ -117,13 +176,13 @@ export default function PRTrackerPage() {
                   <option value="deadlift">Deadlift</option>
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium mb-1">Weight (kg)</label>
                 <input
                   type="number"
-                  value={newPR.weight || ''} // Show empty string when weight is 0
-                  placeholder="0"  // Add placeholder
+                  value={newPR.weight || ''}
+                  placeholder="0"
                   onChange={(e) => setNewPR({ ...newPR, weight: Number(e.target.value) })}
                   className="w-full p-2 bg-gray-700 rounded border border-gray-600 text-white"
                   required
@@ -152,11 +211,49 @@ export default function PRTrackerPage() {
           </div>
 
           <div className="bg-gray-800 p-6 rounded-lg shadow-xl">
+            <h2 className="text-2xl font-semibold mb-4">Your PRs</h2>
+            {prs.length > 0 ? (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left border-b border-gray-700">
+                      <th className="py-2">Exercise</th>
+                      <th className="py-2">Weight (kg)</th>
+                      <th className="py-2">Date</th>
+                      <th className="py-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {prs.map((pr: any) => (
+                      <tr key={pr.id} className="border-b border-gray-700/50">
+                        <td className="py-2">{pr.exercise}</td>
+                        <td className="py-2">{pr.weight}</td>
+                        <td className="py-2">{new Date(pr.date).toLocaleDateString()}</td>
+                        <td className="py-2">
+                          <button
+                            onClick={() => handleDelete(pr.id)}
+                            className="text-red-400 hover:text-red-300 text-sm"
+                            title="Delete PR"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p className="text-center text-gray-400">No PRs recorded yet</p>
+            )}
+          </div>
+
+          <div className="md:col-span-2 bg-gray-800 p-6 rounded-lg shadow-xl">
             <h2 className="text-2xl font-semibold mb-4">Progress Chart</h2>
             {prs.length > 0 ? (
               <Line data={chartData} options={chartOptions} />
             ) : (
-              <p className="text-center text-gray-400">No PRs recorded yet</p>
+              <p className="text-center text-gray-400">No PRs to display in chart</p>
             )}
           </div>
         </div>
